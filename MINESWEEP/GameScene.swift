@@ -16,9 +16,18 @@ class GameScene: SKScene {
     var tile = Tile()
     var grid = [[Tile]]()
     var gridSize = 6;
+    var gameOver = false;
+    var flagOutlet : UIButton?
     
     override func didMove(to view: SKView) {
-        //self.addChild(mine.sprite)
+        setup()
+    }
+    
+    func setup() {
+        self.removeAllChildren()
+        gameOver = false;
+        grid = [[Tile]]()
+        flagOutlet?.isEnabled = true;
         for x in 0 ... 5 {
             var row = [Tile]()
             for y in 0 ... 5 {
@@ -27,7 +36,7 @@ class GameScene: SKScene {
                 row[y].position = CGPoint(x: (Double(x) * 50.0) - 100, y: (Double(y) * 50.0) - 100)
             }
             grid.append(row)
-            }
+        }
         for _ in 0 ... 6 {
             let randomX = Int.random(in: 0 ... 5);
             let randomY = Int.random(in: 0 ... 5);
@@ -91,6 +100,9 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
+        if gameOver == true {
+            return
+        }
         let touched = self.nodes(at: pos)
         for tile in touched {
             if tile.name == "Tile" {
@@ -99,9 +111,11 @@ class GameScene: SKScene {
                 if cTile.mine {
                     for row in grid {
                         for tile in row {
-                            if tile.mine {
-                                if flagMode == false {
-                                     tile.change()
+                            if flagMode == false {
+                                if tile.mine {
+                                    flagOutlet?.isEnabled = false;
+                                    gameOver = true;
+                                    tile.change()
                                 }
                             }
                         }

@@ -11,7 +11,9 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
+    
+    @IBOutlet weak var flagOutlet: UIButton!
+    var gameScene : GameScene?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +22,8 @@ class GameViewController: UIViewController {
             if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
-                
+                gameScene = scene as! GameScene;
+                gameScene?.flagOutlet = flagOutlet;
                 // Present the scene
                 view.presentScene(scene)
             }
@@ -32,12 +35,12 @@ class GameViewController: UIViewController {
         }
     }
     
-    func gameOver()  {
-        
+    @IBAction func flagButton(_ sender: UIButton) {
+        flagMode = !flagMode;
     }
     
-    @IBAction func flagButton(_ sender: Any) {
-        flagMode = !flagMode;
+    @IBAction func resetButton(_ sender: UIButton) {
+        gameScene?.setup()
     }
     
     override var shouldAutorotate: Bool {

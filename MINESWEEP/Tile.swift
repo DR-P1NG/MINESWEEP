@@ -28,7 +28,6 @@ class Tile: SKSpriteNode {
     
     func change(){
         let num = String(count)
-        
         if flagMode == true {
             if isClicked == false {
                 self.texture = SKTexture(imageNamed: "Flag")
@@ -40,11 +39,21 @@ class Tile: SKSpriteNode {
         } else if isFlagged == false {
             if mine == true {
                 self.texture = SKTexture(imageNamed: "Mine")
-
             } else {
                 self.texture = SKTexture(imageNamed: num)
             }
             isClicked = true;
+        } else if isFlagged == true && mine == true {
+            self.texture = SKTexture(imageNamed: "Mine")
+//        } else if isFlagged == true && mine == false {
+//            self.texture = SKTexture(imageNamed: "NotMine")
+        }
+        if count == 0 && flagMode == false && mine == false {
+            for neighbor in neighbors {
+                if neighbor.isClicked == false {
+                    neighbor.change()
+                }
+            }
         }
     }
 }
