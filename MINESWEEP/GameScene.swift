@@ -14,6 +14,7 @@ var flagMode = false;
 class GameScene: SKScene {
     
     let background = Background()
+    let smile = Smile();
     var tile = Tile()
     var grid = [[Tile]]()
     var gridSizeX = 11;
@@ -26,9 +27,11 @@ class GameScene: SKScene {
     }
     
     func setup() {
+        smile.smile.texture = SKTexture(imageNamed: "Smile")
         self.removeAllChildren()
         gameOver = false;
         self.addChild(background.background)
+        self.addChild(smile.smile)
         grid = [[Tile]]()
         flagOutlet?.isEnabled = true;
         for x in 0 ... 10 {
@@ -37,10 +40,11 @@ class GameScene: SKScene {
                 row.append(Tile())
                 self.addChild(row[y])
                 row[y].position = CGPoint(x: (Double(x) * 52.2) - 260, y: (Double(y) * 52.2) - 565)
+                row[y].gameScene = self;
             }
             grid.append(row)
         }
-        for _ in 0 ... 59 {
+        for _ in 0 ... 1 {
             let randomX = Int.random(in: 0 ... 10);
             let randomY = Int.random(in: 0 ... 20);
             grid[randomX][randomY].mine = true;
@@ -103,7 +107,7 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if gameOver == true {
+        if gameOver == true || winFunc() == true {
             return
         }
         let touched = self.nodes(at: pos)
@@ -112,26 +116,42 @@ class GameScene: SKScene {
                 let cTile = tile as! Tile;
                 cTile.change()
                 if cTile.mine && cTile.isFlagged == false {
-                    for row in grid {
-                        for tile in row {
-                            if flagMode == false {
-                                if tile.mine && tile.isFlagged == false {
-                                    flagOutlet?.isEnabled = false;
-                                    gameOver = true;
-                                    tile.change()
-                                } else if tile.isFlagged == true && tile.mine == false {
-                                    tile.texture = SKTexture(imageNamed: "NotMine")
-                                }
-                            }
-                        }
+                    explode()
+                }
+            }
+        }
+        if winFunc() {
+            smile.smile.texture = SKTexture(imageNamed: "WinSmile")
+            flagOutlet?.isEnabled = false;
+        }
+    }
+    
+    func explode() {
+        for row in grid {
+            for tile in row {
+                if flagMode == false {
+                    if tile.mine && tile.isFlagged == false {
+                        flagOutlet?.isEnabled = false;
+                        gameOver = true;
+                        smile.smile.texture = SKTexture(imageNamed: "DeadSmile")
+                        tile.change()
+                    } else if tile.isFlagged == true && tile.mine == false {
+                        tile.texture = SKTexture(imageNamed: "NotMine")
                     }
                 }
             }
         }
     }
     
-    func explode() {
-        //idk
+    func winFunc() -> Bool {
+        for row in grid {
+            for tile in row {
+                if tile.isClicked == false && tile.mine == false {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
     func touchMoved(toPoint pos : CGPoint) {

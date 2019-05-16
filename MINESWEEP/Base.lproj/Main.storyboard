@@ -19,18 +19,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q01-HB-NcD">
-                                <rect key="frame" x="280.5" y="50" width="40" height="40"/>
+                                <rect key="frame" x="280.5" y="51" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="Smile"/>
+                                <state key="normal" backgroundImage="ResetButton"/>
                                 <connections>
                                     <action selector="resetButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="kIW-Q5-VUr"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zb2-hT-VoM">
-                                <rect key="frame" x="93.5" y="50" width="40" height="40"/>
+                                <rect key="frame" x="93.5" y="51" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="55"/>
-                                <state key="normal" title="IIII" backgroundImage="Flag">
+                                <state key="normal" title="IIII" backgroundImage="RedFlag">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -51,7 +51,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Flag" width="16" height="16"/>
-        <image name="Smile" width="13" height="13"/>
+        <image name="RedFlag" width="56" height="56"/>
+        <image name="ResetButton" width="56" height="56"/>
     </resources>
 </document>

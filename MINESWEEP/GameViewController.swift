@@ -37,6 +37,11 @@ class GameViewController: UIViewController {
     
     @IBAction func flagButton(_ sender: UIButton) {
         flagMode = !flagMode;
+        if flagMode == false {
+            flagOutlet?.setBackgroundImage(UIImage(named: "RedFlag"), for: .normal)
+        } else if flagMode == true {
+            flagOutlet?.setBackgroundImage(UIImage(named: "GreenFlag"), for: .normal)
+        }
     }
     
     @IBAction func resetButton(_ sender: UIButton) {

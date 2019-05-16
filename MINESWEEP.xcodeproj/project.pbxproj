@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD092B0B228E1F3500F4B1CA /* Smile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD092B0A228E1F3500F4B1CA /* Smile.swift */; };
 		DD5D4970228DC34B00020C42 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5D496F228DC34B00020C42 /* Background.swift */; };
 		DD71D9BD225E4D9B00D7ADA9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD71D9BC225E4D9B00D7ADA9 /* AppDelegate.swift */; };
 		DD71D9BF225E4D9B00D7ADA9 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DD71D9BE225E4D9B00D7ADA9 /* GameScene.sks */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD092B0A228E1F3500F4B1CA /* Smile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Smile.swift; sourceTree = "<group>"; };
 		DD5D496F228DC34B00020C42 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		DD71D9B9225E4D9B00D7ADA9 /* MINESWEEP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MINESWEEP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD71D9BC225E4D9B00D7ADA9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				DD71D9BE225E4D9B00D7ADA9 /* GameScene.sks */,
 				DD71D9C0225E4D9B00D7ADA9 /* Actions.sks */,
 				DD71D9C2225E4D9B00D7ADA9 /* GameScene.swift */,
+				DD092B0A228E1F3500F4B1CA /* Smile.swift */,
 				DD71D9F22260F7F600D7ADA9 /* Tile.swift */,
 				DD71D9C6225E4D9B00D7ADA9 /* Main.storyboard */,
 				DD71D9C9225E4D9C00D7ADA9 /* Assets.xcassets */,
@@ -275,6 +278,7 @@
 			files = (
 				DD71D9F32260F7F600D7ADA9 /* Tile.swift in Sources */,
 				DD71D9C3225E4D9B00D7ADA9 /* GameScene.swift in Sources */,
+				DD092B0B228E1F3500F4B1CA /* Smile.swift in Sources */,
 				DD71D9C5225E4D9B00D7ADA9 /* GameViewController.swift in Sources */,
 				DD71D9BD225E4D9B00D7ADA9 /* AppDelegate.swift in Sources */,
 				DD5D4970228DC34B00020C42 /* Background.swift in Sources */,

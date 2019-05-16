@@ -29,6 +29,24 @@ class Tile: SKSpriteNode {
     
     func change(){
         let num = String(count)
+        if isClicked {
+            var tCount = 0
+            for n in neighbors {
+                if n.isFlagged {
+                    tCount += 1;
+                }
+            }
+            if tCount == count && mine == false && flagMode == false {
+                for n in neighbors {
+                    if !n.isClicked {
+                        n.change()
+                    }
+                    if n.mine {
+                        gameScene?.explode()
+                    }
+                }
+            }
+        }
         if flagMode == true {
             if isClicked == false {
                 self.texture = SKTexture(imageNamed: "Flag")
@@ -49,21 +67,6 @@ class Tile: SKSpriteNode {
             for neighbor in neighbors {
                 if neighbor.isClicked == false {
                     neighbor.change()
-                }
-            }
-        }
-        if isClicked {
-            var tCount = 0
-            for n in neighbors {
-                if n.isFlagged {
-                    tCount += 1;
-                }
-            }
-            if tCount == count && mine == false && flagMode == false {
-                for n in neighbors {
-                    if !n.isClicked {
-                        n.change()
-                    }
                 }
             }
         }
