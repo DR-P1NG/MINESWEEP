@@ -16,6 +16,7 @@ class Tile: SKSpriteNode {
     var count = 0;
     var isFlagged = false;
     var isClicked = false;
+    var gameScene : GameScene?
     
     init () {
         super.init(texture: tex, color: UIColor.clear, size: CGSize(width: 50, height: 50))
@@ -43,15 +44,26 @@ class Tile: SKSpriteNode {
                 self.texture = SKTexture(imageNamed: num)
             }
             isClicked = true;
-        } else if isFlagged == true && mine == true {
-            self.texture = SKTexture(imageNamed: "Mine")
-//        } else if isFlagged == true && mine == false {
-//            self.texture = SKTexture(imageNamed: "NotMine")
         }
-        if count == 0 && flagMode == false && mine == false {
+        if count == 0 && flagMode == false && mine == false && isFlagged == false {
             for neighbor in neighbors {
                 if neighbor.isClicked == false {
                     neighbor.change()
+                }
+            }
+        }
+        if isClicked {
+            var tCount = 0
+            for n in neighbors {
+                if n.isFlagged {
+                    tCount += 1;
+                }
+            }
+            if tCount == count && mine == false && flagMode == false {
+                for n in neighbors {
+                    if !n.isClicked {
+                        n.change()
+                    }
                 }
             }
         }

@@ -13,9 +13,11 @@ var flagMode = false;
 
 class GameScene: SKScene {
     
+    let background = Background()
     var tile = Tile()
     var grid = [[Tile]]()
-    var gridSize = 6;
+    var gridSizeX = 11;
+    var gridSizeY = 21;
     var gameOver = false;
     var flagOutlet : UIButton?
     
@@ -26,24 +28,25 @@ class GameScene: SKScene {
     func setup() {
         self.removeAllChildren()
         gameOver = false;
+        self.addChild(background.background)
         grid = [[Tile]]()
         flagOutlet?.isEnabled = true;
-        for x in 0 ... 5 {
+        for x in 0 ... 10 {
             var row = [Tile]()
-            for y in 0 ... 5 {
+            for y in 0 ... 20 {
                 row.append(Tile())
                 self.addChild(row[y])
-                row[y].position = CGPoint(x: (Double(x) * 50.0) - 100, y: (Double(y) * 50.0) - 100)
+                row[y].position = CGPoint(x: (Double(x) * 52.2) - 260, y: (Double(y) * 52.2) - 565)
             }
             grid.append(row)
         }
-        for _ in 0 ... 6 {
-            let randomX = Int.random(in: 0 ... 5);
-            let randomY = Int.random(in: 0 ... 5);
+        for _ in 0 ... 59 {
+            let randomX = Int.random(in: 0 ... 10);
+            let randomY = Int.random(in: 0 ... 20);
             grid[randomX][randomY].mine = true;
         }
-        for x in 0 ... gridSize-1 {
-            for y in 0 ... gridSize-1 {
+        for x in 0 ... gridSizeX-1 {
+            for y in 0 ... gridSizeY-1 {
                 var tCount = 0;
                 if x > 0 {
                     if grid[x-1][y].mine {
@@ -51,7 +54,7 @@ class GameScene: SKScene {
                     }
                     grid[x][y].neighbors.append(grid[x-1][y])
                 }
-                if x < gridSize-1 {
+                if x < gridSizeX-1 {
                     if grid[x+1][y].mine {
                         tCount += 1;
                     }
@@ -63,7 +66,7 @@ class GameScene: SKScene {
                     }
                     grid[x][y].neighbors.append(grid[x][y-1])
                 }
-                if y < gridSize-1 {
+                if y < gridSizeY-1 {
                     if grid[x][y+1].mine {
                         tCount += 1;
                     }
@@ -75,19 +78,19 @@ class GameScene: SKScene {
                     }
                     grid[x][y].neighbors.append(grid[x-1][y-1])
                 }
-                if x > 0 && y < gridSize-1 {
+                if x > 0 && y < gridSizeY-1 {
                     if grid[x-1][y+1].mine {
                         tCount += 1;
                     }
                     grid[x][y].neighbors.append(grid[x-1][y+1])
                 }
-                if x < gridSize-1 && y > 0 {
+                if x < gridSizeX-1 && y > 0 {
                     if grid[x+1][y-1].mine {
                         tCount += 1;
                     }
                     grid[x][y].neighbors.append(grid[x+1][y-1])
                 }
-                if x < gridSize-1 && y < gridSize-1 {
+                if x < gridSizeX-1 && y < gridSizeY-1 {
                     if grid[x+1][y+1].mine {
                         tCount += 1;
                     }
@@ -108,14 +111,16 @@ class GameScene: SKScene {
             if tile.name == "Tile" {
                 let cTile = tile as! Tile;
                 cTile.change()
-                if cTile.mine {
+                if cTile.mine && cTile.isFlagged == false {
                     for row in grid {
                         for tile in row {
                             if flagMode == false {
-                                if tile.mine {
+                                if tile.mine && tile.isFlagged == false {
                                     flagOutlet?.isEnabled = false;
                                     gameOver = true;
                                     tile.change()
+                                } else if tile.isFlagged == true && tile.mine == false {
+                                    tile.texture = SKTexture(imageNamed: "NotMine")
                                 }
                             }
                         }
@@ -123,6 +128,10 @@ class GameScene: SKScene {
                 }
             }
         }
+    }
+    
+    func explode() {
+        
     }
     
     func touchMoved(toPoint pos : CGPoint) {
