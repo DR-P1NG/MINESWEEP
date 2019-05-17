@@ -15,13 +15,17 @@ class GameScene: SKScene {
     
     let background = Background()
     let smile = Smile();
+    let mineCount = MineNums();
     var tile = Tile()
     var grid = [[Tile]]()
     var gridSizeX = 11;
     var gridSizeY = 21;
     var gameOver = false;
     var flagOutlet : UIButton?
-    var mines = 60;
+    var mines = 0;
+    
+    var digit = 0;
+    var Time : Timer?
     
     override func didMove(to view: SKView) {
         setup()
@@ -33,8 +37,21 @@ class GameScene: SKScene {
         gameOver = false;
         self.addChild(background.background)
         self.addChild(smile.smile)
+        self.addChild(mineCount.digit1)
+        self.addChild(mineCount.digit2)
+        self.addChild(mineCount.digit3)
+        self.addChild(mineCount.digit4)
+        self.addChild(mineCount.digit5)
+        self.addChild(mineCount.digit6)
         grid = [[Tile]]()
         flagOutlet?.isEnabled = true;
+        
+        if Time != nil {
+            Time?.invalidate()
+            Time = nil;
+        }
+        
+        digit = 0;
         for x in 0 ... 10 {
             var row = [Tile]()
             for y in 0 ... 20 {
@@ -45,9 +62,13 @@ class GameScene: SKScene {
             }
             grid.append(row)
         }
-        for _ in 0 ... 59 {
-            let randomX = Int.random(in: 0 ... 10);
-            let randomY = Int.random(in: 0 ... 20);
+        for _ in 0 ... 49 {
+            var randomX = Int.random(in: 0 ... 10);
+            var randomY = Int.random(in: 0 ... 20);
+            while grid[randomX][randomY].mine == true {
+                randomX = Int.random(in: 0 ... 10);
+                randomY = Int.random(in: 0 ... 20);
+            }
             grid[randomX][randomY].mine = true;
             mines += 1;
         }
@@ -107,29 +128,40 @@ class GameScene: SKScene {
         }
     }
     
+    @objc func updateTime() {
+        digit += 1;
+    }
     
     func touchDown(atPoint pos : CGPoint) {
         if gameOver == true || winFunc() == true {
             return
         }
+        if Time == nil {
+            Time = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameScene.updateTime), userInfo: nil, repeats: true)
+        }
         let touched = self.nodes(at: pos)
         for tile in touched {
             if tile.name == "Tile" {
-                smile.smile.texture = SKTexture(imageNamed: "OpenSmile")
                 let cTile = tile as! Tile;
                 cTile.change()
                 if cTile.mine && cTile.isFlagged == false {
                     explode()
+                }
+                if flagMode == false && gameOver == false {
+                    smile.smile.texture = SKTexture(imageNamed: "OpenSmile")
                 }
             }
         }
         if winFunc() {
             smile.smile.texture = SKTexture(imageNamed: "WinSmile")
             flagOutlet?.isEnabled = false;
+            Time?.invalidate()
+
         }
     }
     
     func explode() {
+        Time?.invalidate()
         for row in grid {
             for tile in row {
                 if flagMode == false {
@@ -161,7 +193,9 @@ class GameScene: SKScene {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        smile.smile.texture = SKTexture(imageNamed: "Smile")
+        if winFunc() == false && gameOver == false {
+            smile.smile.texture = SKTexture(imageNamed: "Smile")
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -183,6 +217,17 @@ class GameScene: SKScene {
     
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        mines = 0;
+        for row in grid {
+            for tile in row {
+                if tile.mine {
+                    mines += 1;
+                }
+                if tile.isFlagged {
+                    mines -= 1;
+                }
+            }
+        }
+        mineCount.setNum(num: mines, time: digit)
     }
 }

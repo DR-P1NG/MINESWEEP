@@ -46,6 +46,10 @@ class GameViewController: UIViewController {
     
     @IBAction func resetButton(_ sender: UIButton) {
         gameScene?.setup()
+        gameScene?.mines = 0;
+        gameScene?.Time?.invalidate()
+        gameScene?.Time = nil;
+        gameScene?.digit = 0;
     }
     
     override var shouldAutorotate: Bool {
