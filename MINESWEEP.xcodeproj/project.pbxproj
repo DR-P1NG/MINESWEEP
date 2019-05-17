@@ -20,6 +20,7 @@
 		DD71D9D8225E4D9C00D7ADA9 /* MINESWEEPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD71D9D7225E4D9C00D7ADA9 /* MINESWEEPTests.swift */; };
 		DD71D9E3225E4D9C00D7ADA9 /* MINESWEEPUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD71D9E2225E4D9C00D7ADA9 /* MINESWEEPUITests.swift */; };
 		DD71D9F32260F7F600D7ADA9 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD71D9F22260F7F600D7ADA9 /* Tile.swift */; };
+		DDAD0291228F0699002FD267 /* MineNums.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD0290228F0699002FD267 /* MineNums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		DD71D9E2225E4D9C00D7ADA9 /* MINESWEEPUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MINESWEEPUITests.swift; sourceTree = "<group>"; };
 		DD71D9E4225E4D9C00D7ADA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD71D9F22260F7F600D7ADA9 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		DDAD0290228F0699002FD267 /* MineNums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineNums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				DD71D9C2225E4D9B00D7ADA9 /* GameScene.swift */,
 				DD092B0A228E1F3500F4B1CA /* Smile.swift */,
 				DD71D9F22260F7F600D7ADA9 /* Tile.swift */,
+				DDAD0290228F0699002FD267 /* MineNums.swift */,
 				DD71D9C6225E4D9B00D7ADA9 /* Main.storyboard */,
 				DD71D9C9225E4D9C00D7ADA9 /* Assets.xcassets */,
 				DD5D496F228DC34B00020C42 /* Background.swift */,
@@ -280,6 +283,7 @@
 				DD71D9C3225E4D9B00D7ADA9 /* GameScene.swift in Sources */,
 				DD092B0B228E1F3500F4B1CA /* Smile.swift in Sources */,
 				DD71D9C5225E4D9B00D7ADA9 /* GameViewController.swift in Sources */,
+				DDAD0291228F0699002FD267 /* MineNums.swift in Sources */,
 				DD71D9BD225E4D9B00D7ADA9 /* AppDelegate.swift in Sources */,
 				DD5D4970228DC34B00020C42 /* Background.swift in Sources */,
 			);

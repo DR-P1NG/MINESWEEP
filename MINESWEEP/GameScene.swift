@@ -21,6 +21,7 @@ class GameScene: SKScene {
     var gridSizeY = 21;
     var gameOver = false;
     var flagOutlet : UIButton?
+    var mines = 60;
     
     override func didMove(to view: SKView) {
         setup()
@@ -44,10 +45,11 @@ class GameScene: SKScene {
             }
             grid.append(row)
         }
-        for _ in 0 ... 1 {
+        for _ in 0 ... 59 {
             let randomX = Int.random(in: 0 ... 10);
             let randomY = Int.random(in: 0 ... 20);
             grid[randomX][randomY].mine = true;
+            mines += 1;
         }
         for x in 0 ... gridSizeX-1 {
             for y in 0 ... gridSizeY-1 {
@@ -113,6 +115,7 @@ class GameScene: SKScene {
         let touched = self.nodes(at: pos)
         for tile in touched {
             if tile.name == "Tile" {
+                smile.smile.texture = SKTexture(imageNamed: "OpenSmile")
                 let cTile = tile as! Tile;
                 cTile.change()
                 if cTile.mine && cTile.isFlagged == false {
@@ -158,6 +161,7 @@ class GameScene: SKScene {
     }
     
     func touchUp(atPoint pos : CGPoint) {
+        smile.smile.texture = SKTexture(imageNamed: "Smile")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

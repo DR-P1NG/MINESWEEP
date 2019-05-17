@@ -41,7 +41,7 @@ class Tile: SKSpriteNode {
                     if !n.isClicked {
                         n.change()
                     }
-                    if n.mine {
+                    if n.mine && n.isFlagged == false {
                         gameScene?.explode()
                     }
                 }
