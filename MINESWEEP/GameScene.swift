@@ -130,6 +130,9 @@ class GameScene: SKScene {
     
     @objc func updateTime() {
         digit += 1;
+        if digit > 998 {
+            Time?.invalidate()
+        }
     }
     
     func touchDown(atPoint pos : CGPoint) {
